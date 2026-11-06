@@ -66,18 +66,13 @@ brew install --cask --adopt obs
 
 ```mermaid
 flowchart TD
-    A["会議録音でM4AとMKV原本を保存"] --> B{"音声を鮮明化する必要がある？"}
-    B -->|そのまま使う| D["Qwen ASRで文字起こし"]
-    B -->|必要な場合だけ| C["NVIDIA NemotronLabs RE-USE<br/>処理した音声を別ファイルに保存"]
+    A["録音音声を保存<br/>M4A / MKV原本"] --> B{"鮮明化が必要？"}
+    B -->|そのまま| D["Qwen ASR<br/>全文の文字起こし"]
+    B -->|必要なとき| C["RE-USEで鮮明化<br/>別ファイルへ保存"]
     C --> D
-    D --> E["全文の文字起こしを保存"]
-    E --> F["LLMで要約を作成<br/>決定事項、未決の課題、次の行動"]
-    F --> G["会議のインフォグラフィックを作成"]
-    E --> H["Obsidianに会議ノートを保存"]
-    F --> H
-    G --> H
-    A -.->|原音へのリンク| H
-    H --> I["日付やテーマで一覧化<br/>検索、過去の会議との照合、再要約"]
+    D --> E["要約と図解を作成<br/>LLMなどを活用"]
+    D -->|全文| F["Obsidianに蓄積<br/>全文 / 要約 / 図解<br/>日付やテーマで検索"]
+    E --> F
 ```
 
 ### Qwen ASRで文字起こしする
@@ -135,23 +130,23 @@ macOSの標準入出力先を切り替える処理は行いません。
 
 ```mermaid
 flowchart TD
-    UI["メニューバーと操作パネル<br/>開始、停止、録音音量の調整"] <-->|操作と状態| WS["認証付きobs-websocket<br/>127.0.0.1へのローカル接続"]
+    UI["操作パネル<br/>開始 / 停止 / 録音音量"] <-->|操作と状態| WS["obs-websocket<br/>認証付きローカル接続"]
 
     subgraph OBS["OBS Studio"]
-        MIC["選択したマイク<br/>CoreAudio"] --> MG["マイクの録音音量"]
-        DESK["デスクトップ音声<br/>ScreenCaptureKit"] --> DG["デスクトップの録音音量"]
+        MIC["マイク<br/>CoreAudio"] --> MG["マイクの録音音量"]
+        DESK["デスクトップ<br/>ScreenCaptureKit"] --> DG["デスクトップの録音音量"]
         MG --> REC["録音エンジン"]
         DG --> REC
-        REC --> MKV["MKV原本に書き込み<br/>ミックスと音源別の3トラック"]
+        REC --> MKV["MKV原本に保存<br/>ミックスと音源別"]
     end
 
-    WS <-->|開始と停止、音量、メーター、録音状態| REC
-    MKV --> STOP["OBSの停止完了を確認"]
-    STOP --> COPY["ffmpegでミックス音声をM4Aへ抽出<br/>AACを再エンコードせずコピー"]
-    COPY --> CHECK{"M4A全体のデコード確認に成功？"}
-    CHECK -->|成功| SAVE["最終ファイル名のM4Aを保存"]
-    CHECK -->|失敗| ERROR["エラーを表示<br/>MKV原本と作成途中のM4Aを保持"]
-    SAVE --> KEEP["MKV原本も保存先に残す"]
+    WS <-->|操作 / 状態 / メーター| REC
+    MKV --> STOP["停止完了を確認"]
+    STOP --> COPY["ffmpegでM4Aへ抽出<br/>AACをコピー"]
+    COPY --> CHECK{"全体のデコード成功？"}
+    CHECK -->|成功| SAVE["M4Aを確定して保存"]
+    CHECK -->|失敗| ERROR["エラーを表示<br/>原本と途中ファイルを残す"]
+    SAVE --> KEEP["MKV原本も保持"]
 ```
 
 各部分の役割は次のとおりです。
