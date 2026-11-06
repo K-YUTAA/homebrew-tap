@@ -67,11 +67,11 @@ brew install --cask --adopt obs
 ```mermaid
 flowchart TD
     A["録音音声を保存<br/>M4A / MKV原本"] --> B{"鮮明化が必要？"}
-    B -->|そのまま| D["Qwen ASR<br/>全文の文字起こし"]
-    B -->|必要なとき| C["RE-USEで鮮明化<br/>別ファイルへ保存"]
+    B -->|そのまま| D["Qwen ASR<br/>文字起こし"]
+    B -->|必要なとき| C["RE-USEで鮮明化<br/>別名で保存"]
     C --> D
-    D --> E["要約と図解を作成<br/>LLMなどを活用"]
-    D -->|全文| F["Obsidianに蓄積<br/>全文 / 要約 / 図解<br/>日付やテーマで検索"]
+    D --> E["要約と図解<br/>LLMなどを活用"]
+    D -->|全文| F["Obsidian<br/>会議アーカイブ"]
     E --> F
 ```
 
@@ -130,22 +130,22 @@ macOSの標準入出力先を切り替える処理は行いません。
 
 ```mermaid
 flowchart TD
-    UI["操作パネル<br/>開始 / 停止 / 録音音量"] <-->|操作と状態| WS["obs-websocket<br/>認証付きローカル接続"]
+    UI["操作パネル<br/>開始と停止<br/>録音音量の調整"] <-->|操作と状態| WS["obs-websocket<br/>認証付き<br/>ローカル接続"]
 
     subgraph OBS["OBS Studio"]
-        MIC["マイク<br/>CoreAudio"] --> MG["マイクの録音音量"]
-        DESK["デスクトップ<br/>ScreenCaptureKit"] --> DG["デスクトップの録音音量"]
+        MIC["マイク<br/>CoreAudio"] --> MG["録音音量"]
+        DESK["デスクトップ<br/>ScreenCaptureKit"] --> DG["録音音量"]
         MG --> REC["録音エンジン"]
         DG --> REC
-        REC --> MKV["MKV原本に保存<br/>ミックスと音源別"]
+        REC --> MKV["MKV原本に保存<br/>3音声トラック"]
     end
 
     WS <-->|操作 / 状態 / メーター| REC
     MKV --> STOP["停止完了を確認"]
-    STOP --> COPY["ffmpegでM4Aへ抽出<br/>AACをコピー"]
-    COPY --> CHECK{"全体のデコード成功？"}
-    CHECK -->|成功| SAVE["M4Aを確定して保存"]
-    CHECK -->|失敗| ERROR["エラーを表示<br/>原本と途中ファイルを残す"]
+    STOP --> COPY["ffmpeg<br/>M4Aへ抽出<br/>AACをコピー"]
+    COPY --> CHECK{"全体をデコード<br/>成功？"}
+    CHECK -->|成功| SAVE["M4Aの保存確定"]
+    CHECK -->|失敗| ERROR["エラーを表示<br/>原本を保持<br/>途中出力も保持"]
     SAVE --> KEEP["MKV原本も保持"]
 ```
 
