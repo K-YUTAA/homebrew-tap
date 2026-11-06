@@ -1,0 +1,10 @@
+.DS_Store
+*.zip
+*.dmg
+*.app/
+*.m4a
+*.mkv
+/checks/
+/backups/
+/setup.json
+/state.json
