@@ -1,3 +1,18 @@
+# K-YUTAA Homebrew tap
+
+## SpacePaper
+
+モニターと仮想デスクトップに異なる壁紙を自動で割り当てるMacアプリです。
+
+```sh
+brew install --cask K-YUTAA/tap/spacepaper
+open -a SpacePaper
+```
+
+macOS 14以降、Apple Silicon／Intel共通。使い方と確認範囲は[SpacePaperのリポジトリ](https://github.com/K-YUTAA/spacepaper)を参照してください。公証していない試用ビルドです。
+
+---
+
 # Pairwave
 
 <img src="assets/app-icon.png" width="96" height="96" alt="Pairwaveのアイコン">
