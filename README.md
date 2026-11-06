@@ -5,9 +5,13 @@
 モニターと仮想デスクトップに異なる壁紙を自動で割り当てるMacアプリです。
 
 ```sh
+brew tap K-YUTAA/tap
+brew trust --cask K-YUTAA/tap/spacepaper
 brew install --cask K-YUTAA/tap/spacepaper
 open -a SpacePaper
 ```
+
+`trust`コマンドがない古いHomebrewでは、その行を省略できます。
 
 macOS 14以降、Apple Silicon／Intel共通。使い方と確認範囲は[SpacePaperのリポジトリ](https://github.com/K-YUTAA/spacepaper)を参照してください。公証していない試用ビルドです。
 
