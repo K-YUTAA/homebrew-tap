@@ -1,8 +1,8 @@
 cask "meeting-recorder" do
-  version "1.3.0"
-  sha256 "36061d5a98966466affb0feba2d58b092e3f8d2174b10aa799ea7d28b2a72a62"
+  version "1.3.1"
+  sha256 "2a181b1e0393017316f4e7e39a95c95456142489c3a2be6030930a81d3d83d80"
 
-  url "https://github.com/K-YUTAA/homebrew-tap/releases/download/v1.3.0/meeting-recorder-macos.zip"
+  url "https://github.com/K-YUTAA/homebrew-tap/releases/download/v1.3.1/meeting-recorder-macos.zip"
   name "会議録音"
   desc "Menu bar controller for microphone and desktop audio recording with OBS"
   homepage "https://github.com/K-YUTAA/homebrew-tap"
