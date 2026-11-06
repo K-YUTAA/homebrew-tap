@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 cask "spacepaper" do
-  version "1.1.0"
-  sha256 "01751163e66f702c89a1e76e27dc1d032a19ab8bb8dc5533c30cffc385819103"
+  version "1.1.1"
+  sha256 "a718834bede36b8ab9883bd1fa3449a52e67554b9ddb5676684c1b41c89dfc18"
 
   url "https://github.com/K-YUTAA/spacepaper/releases/download/v#{version}/SpacePaper-#{version}-universal.zip"
   name "SpacePaper"
