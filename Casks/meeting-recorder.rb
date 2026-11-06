@@ -1,8 +1,8 @@
 cask "meeting-recorder" do
-  version "1.5.2"
-  sha256 "a166db12e001fc08657fa2c83424a11e00b70bf4ffe8f878fe835f6aefbecf9c"
+  version "1.5.3"
+  sha256 "31081c738f8d3fd99992677d775f43252fec7d0ad7aa866d5da5116039184478"
 
-  url "https://github.com/K-YUTAA/homebrew-tap/releases/download/v1.5.2/pairwave-macos.zip"
+  url "https://github.com/K-YUTAA/homebrew-tap/releases/download/v1.5.3/pairwave-macos.zip"
   name "Pairwave"
   desc "Menu bar controller for microphone and desktop audio recording with OBS"
   homepage "https://github.com/K-YUTAA/homebrew-tap"
